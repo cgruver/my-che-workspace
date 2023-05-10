@@ -6,7 +6,7 @@ metadata:
 components:
 - name: dev-tools
   container: 
-    image: quay.io/cgruver0/che/che-demo-app:latest
+    image: quay.io/cgruver0/che/che-demo-app:test
     memoryLimit: 6Gi
     mountSources: true
     env:
