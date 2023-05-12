@@ -56,6 +56,12 @@ commands:
     component: oc-cli
     label: Copy OpenShift CLI
   id: cp-oc-cli
+- exec:
+    commandLine: "rm -rf ~/.kube"
+    component: dev-tools
+  id: cleanup-kube
 events:
   preStart:
     - cp-oc-cli
+  preStop:
+    - cleanup-kube
