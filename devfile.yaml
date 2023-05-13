@@ -43,6 +43,16 @@ components:
     sourceMapping: /projects
     mountSources: true
     memoryLimit: 64M
+- name: user-ns
+  container:
+    image: quay.io/cgruver0/che/che-demo-app:test
+    command:
+      - /bin/bash
+    args:
+      - '-c'
+      - >-
+        USER=$(whoami) ; START_ID=$(( $(id -u)+1 )) ; echo "${USER}:${START_ID}:2147483646" > /etc/subuid ; echo "${USER}:${START_ID}:2147483646" > /etc/subgid
+    memoryLimit: 64M
 commands:
 - exec:
     commandLine: "kubedock server --port-forward"
@@ -56,6 +66,10 @@ commands:
     component: oc-cli
     label: Copy OpenShift CLI
   id: cp-oc-cli
+- apply:
+    component: user-ns
+    label: Set User Namespace
+  id: set-userns
 - exec:
     commandLine: "rm -rf ~/.kube"
     component: dev-tools
@@ -63,5 +77,6 @@ commands:
 events:
   preStart:
     - cp-oc-cli
+    - set-userns
   preStop:
     - cleanup-kube
