@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../che-vsx-registry"
 		}
 	],
 	"extensions": {
