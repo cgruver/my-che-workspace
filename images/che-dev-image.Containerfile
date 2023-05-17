@@ -4,6 +4,7 @@ ARG WORK_DIR="/projects"
 ARG JAVA_PACKAGE=java-17-openjdk-devel
 ARG USER_HOME_DIR="/home/user"
 ARG WORK_DIR="/projects"
+ARG TOOLS_IMAGE="che-my-dev-tools"
 ARG TOOLS_IMAGE_TAG="latest"
 ENV HOME=${USER_HOME_DIR}
 ENV BUILDAH_ISOLATION=chroot
@@ -13,8 +14,8 @@ ENV MAVEN_CONFIG="${HOME}/.m2"
 ENV GRAALVM_HOME=/usr/local/tools/graalvm
 ENV JAVA_HOME=/etc/alternatives/jre_17_openjdk
 ENV PATH=${PATH}:/usr/local/tools/bin
-COPY --from=quay.io/cgruver0/che/dev-tools:${TOOLS_IMAGE_TAG} /tools/ /usr/local/tools
-RUN microdnf --disableplugin=subscription-manager install -y openssl compat-openssl11 libbrotli git tar gzip zip unzip which shadow-utils bash zsh vi wget jq podman buildah skopeo glibc-devel zlib-devel gcc libffi-devel libstdc++-devel gcc-c++ glibc-langpack-en ca-certificates ${JAVA_PACKAGE}; \
+COPY --from=quay.io/cgruver0/che/${TOOLS_IMAGE}:${TOOLS_IMAGE_TAG} /tools/ /usr/local/tools
+RUN microdnf --disableplugin=subscription-manager install -y openssl compat-openssl11 libbrotli git tar gzip zip xz unzip which shadow-utils bash zsh vi wget jq podman buildah skopeo glibc-devel zlib-devel gcc libffi-devel libstdc++-devel gcc-c++ glibc-langpack-en ca-certificates ${JAVA_PACKAGE}; \
   microdnf update -y ; \
   microdnf clean all ; \
   mkdir -p ${USER_HOME_DIR} ; \

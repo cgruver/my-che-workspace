@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 MAVEN_VERSION=${MAVEN_VERSION:=3.8.8}
-QUARKUS_VERSION=${QUARKUS_VERSION:=2.16.1.Final}
+QUARKUS_VERSION=${QUARKUS_VERSION:=3.0.3.Final}
 NODE_VERSION=${NODE_VERSION:=v18.15.0}
 MANDREL_VERSION=${MANDREL_VERSION:=22.3.0.1-Final}
 KUBEDOCK_VERSION=${KUBEDOCK_VERSION:=0.9.2}
-TOOLS_IMAGE_PATH=${TOOLS_IMAGE_PATH:=quay.io/cgruver0/che/dev-tools}
+TOOLS_IMAGE_PATH=${TOOLS_IMAGE_PATH:=quay.io/cgruver0/che/che-my-dev-tools}
 TOOLS_IMAGE_TAG=${TOOLS_IMAGE_TAG:=latest}
 DEV_IMAGE_PATH=${DEV_IMAGE_PATH:=quay.io/cgruver0/che/che-dev-image}
 DEV_IMAGE_TAG=${DEV_IMAGE_TAG:=latest}
@@ -103,7 +103,7 @@ function buildToolsImage() {
 }
 
 function buildDevImage() {
-  podman build -t ${DEV_IMAGE_PATH}:${DEV_IMAGE_TAG} --build-arg TOOLS_IMAGE_TAG=${TOOLS_IMAGE_TAG} -f che-demo-app.Containerfile .
+  podman build -t ${DEV_IMAGE_PATH}:${DEV_IMAGE_TAG} --build-arg TOOLS_IMAGE_TAG=${TOOLS_IMAGE_TAG} -f che-dev-image.Containerfile .
   podman push ${DEV_IMAGE_PATH}:${DEV_IMAGE_TAG}
 }
 
