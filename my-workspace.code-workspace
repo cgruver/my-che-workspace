@@ -2,12 +2,6 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"path": "../che-openvsx-registry"
-		},
-		{
-			"path": "../che-demo-app"
 		}
 	],
 	"extensions": {

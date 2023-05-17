@@ -14,6 +14,8 @@ components:
       value: "/bin/zsh"
     - name: HOME
       value: "/projects/home"
+    - name: HISTFILE
+      value: "/projects/home/.sh_history"
     - name: TESTCONTAINERS_CHECKS_DISABLE
       value: "true"
     - name: DOCKER_HOST
