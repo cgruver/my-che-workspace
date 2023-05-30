@@ -44,8 +44,7 @@ components:
     image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
     sourceMapping: /projects
     mountSources: true
-    memoryRequest: 128M
-    memoryLimit: 512M
+    memoryLimit: 256M
 - name: user-ns
   container:
     image: quay.io/cgruver0/che/che-demo-app:test
