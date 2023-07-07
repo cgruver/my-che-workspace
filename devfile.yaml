@@ -20,6 +20,10 @@ components:
       value: "true"
     - name: DOCKER_HOST
       value: "tcp://127.0.0.1:2475"
+    - name: CONTAINER_HOST
+      value: "tcp://127.0.0.1:2475"
+    - name: VSCODE_DEFAULT_WORKSPACE
+      value: "/projects/my-che-workspace/my-workspace.code-workspace"
     volumeMounts:
     - name: home
       path: /projects/home
@@ -47,7 +51,7 @@ components:
     memoryLimit: 256M
 - name: user-ns
   container:
-    image: quay.io/cgruver0/che/che-demo-app:test
+    image: quay.io/cgruver0/che/che-dev-image:latest
     command:
       - /bin/bash
     args:
@@ -72,13 +76,7 @@ commands:
     component: user-ns
     label: Set User Namespace
   id: set-userns
-- exec:
-    commandLine: "rm -rf ~/.kube"
-    component: dev-tools
-  id: cleanup-kube
 events:
   preStart:
     - cp-oc-cli
     - set-userns
-  preStop:
-    - cleanup-kube
