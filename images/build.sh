@@ -88,13 +88,6 @@ function getTools() {
   mkdir -p ${TOOLS_DIR}/jbang
   curl -Ls https://sh.jbang.dev | JBANG_DIR=${TOOLS_DIR}/jbang bash -s - app setup
 
-  ## AWS Cli
-  TEMP_DIR="$(mktemp -d)"
-  curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o ${TEMP_DIR}/awscliv2.zip
-  unzip ${TEMP_DIR}/awscliv2.zip
-  ${TEMP_DIR}/aws/install
-  rm -rf "${TEMP_DIR}"
-
   ## Create Symbolic Links to executables
   cd ${TOOLS_DIR}/bin
   ln -s ../quarkus-cli/bin/quarkus quarkus
