@@ -33,7 +33,12 @@ RUN microdnf --disableplugin=subscription-manager install -y openssl compat-open
   echo user:20000:65536 > /etc/subgid ; \
   chgrp -R 0 /home ; \
   chmod +x /entrypoint.sh ; \
-  chmod -R g=u /home ${WORK_DIR}
+  chmod -R g=u /home ${WORK_DIR} ; \
+  TEMP_DIR="$(mktemp -d)" ; \
+  curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o ${TEMP_DIR}/awscliv2.zip ; \
+  unzip ${TEMP_DIR}/awscliv2.zip ; \
+  ${TEMP_DIR}/aws/install ; \
+  rm -rf "${TEMP_DIR}"
 USER 10001
 WORKDIR ${WORK_DIR}
 ENTRYPOINT [ "/entrypoint.sh" ]
