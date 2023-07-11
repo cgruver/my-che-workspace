@@ -36,7 +36,7 @@ RUN microdnf --disableplugin=subscription-manager install -y openssl compat-open
   chmod -R g=u /home ${WORK_DIR} ; \
   TEMP_DIR="$(mktemp -d)" ; \
   curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o ${TEMP_DIR}/awscliv2.zip ; \
-  unzip ${TEMP_DIR}/awscliv2.zip ; \
+  unzip ${TEMP_DIR}/awscliv2.zip -d ${TEMP_DIR} ; \
   ${TEMP_DIR}/aws/install ; \
   rm -rf "${TEMP_DIR}"
 USER 10001
