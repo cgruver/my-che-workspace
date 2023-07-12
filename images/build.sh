@@ -84,9 +84,9 @@ function getTools() {
   chmod +x ${TOOLS_DIR}/bin/gh
   rm -rf "${TEMP_DIR}"
 
-  ## JBang
-  mkdir -p ${TOOLS_DIR}/jbang
-  curl -Ls https://sh.jbang.dev | JBANG_DIR=${TOOLS_DIR}/jbang bash -s - app setup
+  # ## JBang
+  # mkdir -p ${TOOLS_DIR}/jbang
+  # curl -Ls https://sh.jbang.dev | JBANG_DIR=${TOOLS_DIR}/jbang bash -s - app setup
 
   ## Create Symbolic Links to executables
   cd ${TOOLS_DIR}/bin
@@ -96,7 +96,6 @@ function getTools() {
   ln -s ../node/bin/npm npm
   ln -s ../node/bin/corepack corepack
   ln -s ../node/bin/npx npx
-  ln -s ../jbang/bin/jbang jbang
   ln -s /projects/bin/oc oc
   ln -s /projects/bin/kubectl kubectl
   cd -

@@ -15,7 +15,7 @@ ENV PATH=${PATH}:/usr/local/tools/bin
 ENV JBANG_DIR=/usr/local/tools/jbang
 COPY --from=quay.io/cgruver0/che/${TOOLS_IMAGE}:${TOOLS_IMAGE_TAG} /tools/ /usr/local/tools
 COPY --chown=0:0 entrypoint.sh /
-RUN microdnf --disableplugin=subscription-manager install -y openssl compat-openssl11 libbrotli git tar gzip zip xz unzip which shadow-utils bash zsh vi wget jq podman buildah skopeo glibc-devel zlib-devel gcc libffi-devel libstdc++-devel gcc-c++ glibc-langpack-en ca-certificates ${JAVA_PACKAGE}; \
+RUN microdnf --disableplugin=subscription-manager install -y openssl compat-openssl11 libbrotli git tar gzip zip xz unzip which shadow-utils bash zsh vi wget jq podman buildah skopeo glibc-devel zlib-devel gcc libffi-devel libstdc++-devel gcc-c++ glibc-langpack-en ca-certificates python3-pip python3-devel ${JAVA_PACKAGE}; \
   microdnf update -y ; \
   microdnf clean all ; \
   mkdir -p ${USER_HOME_DIR} ; \
@@ -38,7 +38,13 @@ RUN microdnf --disableplugin=subscription-manager install -y openssl compat-open
   curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o ${TEMP_DIR}/awscliv2.zip ; \
   unzip ${TEMP_DIR}/awscliv2.zip -d ${TEMP_DIR} ; \
   ${TEMP_DIR}/aws/install ; \
-  rm -rf "${TEMP_DIR}"
+  rm -rf "${TEMP_DIR}" ; \
+  pip3 install ansible-navigator ; \
+  pip3 install ansible ; \
+  pip3 install ansible-lint ; \
+  mkdir -p ${JBANG_DIR} ; \
+  curl -Ls https://sh.jbang.dev | bash -s - app setup ; \
+  ln -s ${JBANG_DIR}/bin/jbang /usr/local/tools/bin/jbang
 USER 10001
 WORKDIR ${WORK_DIR}
 ENTRYPOINT [ "/entrypoint.sh" ]
