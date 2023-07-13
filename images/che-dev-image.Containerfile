@@ -11,7 +11,7 @@ ENV BUILDAH_ISOLATION=chroot
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 ENV GRAALVM_HOME=/usr/local/tools/graalvm
 ENV JAVA_HOME=/etc/alternatives/jre_17_openjdk
-ENV PATH=${PATH}:/usr/local/tools/bin
+ENV PATH=${PATH}:/usr/local/tools/bin:/usr/local/tools/node/bin
 ENV JBANG_DIR=/usr/local/tools/jbang
 COPY --from=quay.io/cgruver0/che/${TOOLS_IMAGE}:${TOOLS_IMAGE_TAG} /tools/ /usr/local/tools
 COPY --chown=0:0 entrypoint.sh /
