@@ -22,7 +22,7 @@ RUN microdnf --disableplugin=subscription-manager install -y openssl compat-open
   mkdir -p ${WORK_DIR} ; \
   mkdir -p /usr/local/bin ; \
   npm install -g @angular/cli ; \
-  ln -s /usr/local/tools/node/bin/ng /usr/local/tools/bin/ng ; \
+  npm install -g serverless ; \
   setcap cap_setuid+ep /usr/bin/newuidmap ; \
   setcap cap_setgid+ep /usr/bin/newgidmap ; \
   mkdir -p "${HOME}"/.config/containers ; \
