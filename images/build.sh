@@ -107,6 +107,9 @@ function buildDevImage() {
         DEV_IMAGE_TAG="fuse"
         DEV_CONTAINER_FILE=che-dev-image-fuse.Containerfile
       ;;
+      --init)
+        DEV_IMAGE_TAG="fuse"
+        DEV_CONTAINER_FILE=che-dev-image-fuse-init.Containerfile
     esac
   done
 
