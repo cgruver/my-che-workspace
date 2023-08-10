@@ -8,9 +8,9 @@ KUBEDOCK_VERSION=${KUBEDOCK_VERSION:=0.9.2}
 TOOLS_IMAGE_PATH=${TOOLS_IMAGE_PATH:=quay.io/cgruver0/che/che-my-dev-tools}
 TOOLS_IMAGE_TAG=${TOOLS_IMAGE_TAG:=latest}
 DEV_IMAGE_PATH=${DEV_IMAGE_PATH:=quay.io/cgruver0/che/che-dev-image}
-DEV_IMAGE_TAG=${DEV_IMAGE_TAG:=latest}
+DEV_IMAGE_TAG=${DEV_IMAGE_TAG:=vfs}
 TOOLS_DIR=${TOOLS_DIR:=./tools}
-
+DEV_CONTAINER_FILE=${DEV_CONTAINER_FILE:=che-dev-image-vfs.Containerfile}
 function getTools() {
   rm -rf ${TOOLS_DIR}
   mkdir -p ${TOOLS_DIR}/bin
@@ -99,7 +99,7 @@ function buildToolsImage() {
 }
 
 function buildDevImage() {
-  podman build -t ${DEV_IMAGE_PATH}:${DEV_IMAGE_TAG} --build-arg TOOLS_IMAGE_TAG=${TOOLS_IMAGE_TAG} -f che-dev-image.Containerfile .
+  podman build -t ${DEV_IMAGE_PATH}:${DEV_IMAGE_TAG} --build-arg TOOLS_IMAGE_TAG=${TOOLS_IMAGE_TAG} -f ${DEV_CONTAINER_FILE} .
   podman push ${DEV_IMAGE_PATH}:${DEV_IMAGE_TAG}
 }
 
@@ -115,6 +115,9 @@ do
     -d)
       buildDevImage
     ;;
+    --fuse)
+      DEV_IMAGE_TAG="fuse"
+      DEV_CONTAINER_FILE=che-dev-image-fuse.Containerfile
     *)
        # catch all
     ;;
