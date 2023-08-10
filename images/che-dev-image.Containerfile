@@ -31,9 +31,6 @@ RUN microdnf --disableplugin=subscription-manager install -y openssl compat-open
   chmod -R g=u /etc/passwd /etc/group /etc/subuid /etc/subgid ; \
   echo user:20000:65536 > /etc/subuid  ; \
   echo user:20000:65536 > /etc/subgid ; \
-  chgrp -R 0 /home ; \
-  chmod +x /entrypoint.sh ; \
-  chmod -R g=u /home ${WORK_DIR} ; \
   TEMP_DIR="$(mktemp -d)" ; \
   curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o ${TEMP_DIR}/awscliv2.zip ; \
   unzip ${TEMP_DIR}/awscliv2.zip -d ${TEMP_DIR} ; \
@@ -44,7 +41,10 @@ RUN microdnf --disableplugin=subscription-manager install -y openssl compat-open
   pip3 install ansible-lint ; \
   mkdir -p ${JBANG_DIR} ; \
   curl -Ls https://sh.jbang.dev | bash -s - app setup ; \
-  ln -s ${JBANG_DIR}/bin/jbang /usr/local/tools/bin/jbang
+  ln -s ${JBANG_DIR}/bin/jbang /usr/local/tools/bin/jbang ; \
+  chgrp -R 0 /home ; \
+  chmod +x /entrypoint.sh ; \
+  chmod -R g=u /home ${WORK_DIR}
 USER 10001
 WORKDIR ${WORK_DIR}
 ENTRYPOINT [ "/entrypoint.sh" ]
