@@ -110,6 +110,7 @@ function buildDevImage() {
       --init)
         DEV_IMAGE_TAG="init"
         DEV_CONTAINER_FILE=che-dev-image-fuse-init.Containerfile
+      ;;
     esac
   done
 
@@ -127,7 +128,7 @@ do
       buildToolsImage
     ;;
     -d)
-      buildDevImage
+      buildDevImage "$@"
     ;;
     *)
        # catch all
