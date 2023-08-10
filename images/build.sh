@@ -99,6 +99,17 @@ function buildToolsImage() {
 }
 
 function buildDevImage() {
+
+  for i in "$@"
+  do
+    case $i in
+      --fuse)
+        DEV_IMAGE_TAG="fuse"
+        DEV_CONTAINER_FILE=che-dev-image-fuse.Containerfile
+      ;;
+    esac
+  done
+
   podman build -t ${DEV_IMAGE_PATH}:${DEV_IMAGE_TAG} --build-arg TOOLS_IMAGE_TAG=${TOOLS_IMAGE_TAG} -f ${DEV_CONTAINER_FILE} .
   podman push ${DEV_IMAGE_PATH}:${DEV_IMAGE_TAG}
 }
@@ -115,9 +126,6 @@ do
     -d)
       buildDevImage
     ;;
-    --fuse)
-      DEV_IMAGE_TAG="fuse"
-      DEV_CONTAINER_FILE=che-dev-image-fuse.Containerfile
     *)
        # catch all
     ;;
