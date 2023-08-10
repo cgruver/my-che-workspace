@@ -50,5 +50,5 @@ RUN microdnf --disableplugin=subscription-manager install -y openssl compat-open
   chmod -R g=u /home ${WORK_DIR}
 
 WORKDIR ${WORK_DIR}
-ENTRYPOINT [ "/entrypoint-init.sh" ]
+STOPSIGNAL SIGRTMIN+3
 CMD [ "/sbin/init" ]
