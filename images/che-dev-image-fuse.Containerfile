@@ -2,8 +2,6 @@ FROM registry.access.redhat.com/ubi9/ubi-minimal
 ARG USER_HOME_DIR="/home/user"
 ARG WORK_DIR="/projects"
 ARG JAVA_PACKAGE=java-17-openjdk-devel
-ARG USER_HOME_DIR="/home/user"
-ARG WORK_DIR="/projects"
 ARG TOOLS_IMAGE="che-my-dev-tools"
 ARG TOOLS_IMAGE_TAG="latest"
 ENV HOME=${USER_HOME_DIR}

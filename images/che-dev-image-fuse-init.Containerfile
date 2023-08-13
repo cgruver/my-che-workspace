@@ -51,4 +51,4 @@ RUN microdnf --disableplugin=subscription-manager install -y openssl compat-open
 
 WORKDIR ${WORK_DIR}
 STOPSIGNAL SIGRTMIN+3
-CMD [ "/sbin/init" ]
+ENTRYPOINT [ "/entrypoint-init.sh" ]
