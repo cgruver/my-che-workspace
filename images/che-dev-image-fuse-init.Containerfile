@@ -15,7 +15,7 @@ ENV PATH=${PATH}:/usr/local/tools/bin:/usr/local/tools/node/bin
 ENV JBANG_DIR=/usr/local/tools/jbang
 COPY --from=quay.io/cgruver0/che/${TOOLS_IMAGE}:${TOOLS_IMAGE_TAG} /tools/ /usr/local/tools
 COPY --chown=0:0 entrypoint-init.sh /
-RUN microdnf --disableplugin=subscription-manager install -y openssl compat-openssl11 libbrotli git tar gzip zip xz unzip which shadow-utils bash zsh vi wget jq podman buildah skopeo glibc-devel zlib-devel gcc libffi-devel libstdc++-devel gcc-c++ glibc-langpack-en ca-certificates python3-pip python3-devel ${JAVA_PACKAGE} ; \
+RUN microdnf --disableplugin=subscription-manager install -y openssl compat-openssl11 libbrotli git tar gzip zip xz unzip which shadow-utils bash zsh vi wget jq podman buildah skopeo podman-docker glibc-devel zlib-devel gcc libffi-devel libstdc++-devel gcc-c++ glibc-langpack-en ca-certificates python3-pip python3-devel ${JAVA_PACKAGE} ; \
   systemctl mask systemd-remount-fs.service dev-hugepages.mount sys-fs-fuse-connections.mount systemd-logind.service getty.target console-getty.service systemd-udev-trigger.service systemd-udevd.service systemd-random-seed.service systemd-machine-id-commit.service ; \
   microdnf --disableplugin=subscription-manager install -y procps-ng ; \
   microdnf update -y ; \
@@ -34,6 +34,7 @@ RUN microdnf --disableplugin=subscription-manager install -y openssl compat-open
   chmod -R g=u /etc/passwd /etc/group /etc/subuid /etc/subgid ; \
   echo user:20000:65536 > /etc/subuid  ; \
   echo user:20000:65536 > /etc/subgid ; \
+  echo "user:x:1000:0:user user:/home/user:/bin/bash" >> /etc/passwd ; \
   TEMP_DIR="$(mktemp -d)" ; \
   curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o ${TEMP_DIR}/awscliv2.zip ; \
   unzip ${TEMP_DIR}/awscliv2.zip -d ${TEMP_DIR} ; \

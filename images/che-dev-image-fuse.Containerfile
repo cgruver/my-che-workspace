@@ -13,7 +13,7 @@ ENV PATH=${PATH}:/usr/local/tools/bin:/usr/local/tools/node/bin
 ENV JBANG_DIR=/usr/local/tools/jbang
 COPY --from=quay.io/cgruver0/che/${TOOLS_IMAGE}:${TOOLS_IMAGE_TAG} /tools/ /usr/local/tools
 COPY --chown=0:0 entrypoint.sh /
-RUN microdnf --disableplugin=subscription-manager install -y openssl compat-openssl11 libbrotli git tar gzip zip xz unzip which shadow-utils bash zsh vi wget jq podman buildah skopeo glibc-devel zlib-devel gcc libffi-devel libstdc++-devel gcc-c++ glibc-langpack-en ca-certificates python3-pip python3-devel ${JAVA_PACKAGE}; \
+RUN microdnf --disableplugin=subscription-manager install -y openssl compat-openssl11 libbrotli git tar gzip zip xz unzip which shadow-utils bash zsh vi wget jq podman buildah skopeo podman-docker glibc-devel zlib-devel gcc libffi-devel libstdc++-devel gcc-c++ glibc-langpack-en ca-certificates python3-pip python3-devel ${JAVA_PACKAGE}; \
   microdnf update -y ; \
   microdnf clean all ; \
   mkdir -p ${USER_HOME_DIR} ; \
