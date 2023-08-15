@@ -35,9 +35,15 @@ RUN microdnf --disableplugin=subscription-manager install -y openssl compat-open
   unzip ${TEMP_DIR}/awscliv2.zip -d ${TEMP_DIR} ; \
   ${TEMP_DIR}/aws/install ; \
   rm -rf "${TEMP_DIR}" ; \
+  TEMP_DIR="$(mktemp -d)" ; \
+  curl https://github.com/localstack/localstack-cli/releases/download/v2.2.0/localstack-cli-2.2.0-linux-amd64-onefile.tar.gz -o ${TEMP_DIR}/localstack.tgz ; \
+  tar -xzf ${TEMP_DIR}/localstack.tgz -C /usr/local/bin ; \
+  rm -rf "${TEMP_DIR}" ; \
   pip3 install ansible-navigator ; \
   pip3 install ansible ; \
   pip3 install ansible-lint ; \
+  pip3 install aws-sam-cli ; \
+  pip3 install awscli-local ; \
   mkdir -p ${JBANG_DIR} ; \
   curl -Ls https://sh.jbang.dev | bash -s - app setup ; \
   ln -s ${JBANG_DIR}/bin/jbang /usr/local/tools/bin/jbang ; \
