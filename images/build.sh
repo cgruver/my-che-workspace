@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
 MAVEN_VERSION=${MAVEN_VERSION:=3.8.8}
-QUARKUS_VERSION=${QUARKUS_VERSION:=3.0.3.Final}
-NODE_VERSION=${NODE_VERSION:=v18.15.0}
-MANDREL_VERSION=${MANDREL_VERSION:=22.3.0.1-Final}
-KUBEDOCK_VERSION=${KUBEDOCK_VERSION:=0.9.2}
+QUARKUS_VERSION=${QUARKUS_VERSION:=3.2.4.Final}
+NODE_VERSION=${NODE_VERSION:=v18.17.1}
+MANDREL_VERSION=${MANDREL_VERSION:=23.0.1.2-Final}
+KUBEDOCK_VERSION=${KUBEDOCK_VERSION:=0.12.0}
+GO_VERSION=${GO_VERSION:=1.21.0}
+OPERATOR_SDK_VERSION=${OPERATOR_SDK_VERSION:=v1.31.0}
 TOOLS_IMAGE_PATH=${TOOLS_IMAGE_PATH:=quay.io/cgruver0/che/che-my-dev-tools}
 TOOLS_IMAGE_TAG=${TOOLS_IMAGE_TAG:=latest}
 DEV_IMAGE_PATH=${DEV_IMAGE_PATH:=quay.io/cgruver0/che/che-dev-image}
@@ -83,6 +85,17 @@ function getTools() {
   mv ${TEMP_DIR}/gh_${GH_VERSION}_${GH_ARCH}/bin/gh ${TOOLS_DIR}/bin/
   chmod +x ${TOOLS_DIR}/bin/gh
   rm -rf "${TEMP_DIR}"
+
+  ## Go
+  TEMP_DIR="$(mktemp -d)"
+  curl -fsSL -o ${TEMP_DIR}/go.tgz https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz
+  tar -zxf ${TEMP_DIR}/gh.tgz -C ${TOOLS_DIR}
+  rm -rf "${TEMP_DIR}"
+
+  ## Operator SDK
+  curl -fsSL -o ${TOOLS_DIR}/bin/operator-sdk https://github.com/operator-framework/operator-sdk/releases/download/${OPERATOR_SDK_VERSION}/operator-sdk_linux_amd64
+  chmod +x ${TOOLS_DIR}/bin/operator-sdk
+  
 
   ## Create Symbolic Links to executables
   cd ${TOOLS_DIR}/bin
