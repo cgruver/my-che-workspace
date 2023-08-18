@@ -89,7 +89,7 @@ function getTools() {
   ## Go
   TEMP_DIR="$(mktemp -d)"
   curl -fsSL -o ${TEMP_DIR}/go.tgz https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz
-  tar -zxf ${TEMP_DIR}/gh.tgz -C ${TOOLS_DIR}
+  tar -zxf ${TEMP_DIR}/go.tgz -C ${TOOLS_DIR}
   rm -rf "${TEMP_DIR}"
 
   ## Operator SDK
