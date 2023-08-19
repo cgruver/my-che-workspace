@@ -12,7 +12,7 @@ ENV JAVA_HOME=/etc/alternatives/jre_17_openjdk
 ENV PATH=${PATH}:/usr/local/tools/bin:/usr/local/tools/node/bin
 ENV JBANG_DIR=/usr/local/tools/jbang
 COPY --from=quay.io/cgruver0/che/${TOOLS_IMAGE}:${TOOLS_IMAGE_TAG} /tools/ /usr/local/tools
-COPY --chown=0:0 user-init.sh /
+COPY --chown=0:0 entrypoint.sh /
 RUN microdnf --disableplugin=subscription-manager install -y procps-ng openssl compat-openssl11 libbrotli git tar gzip zip xz unzip which shadow-utils bash zsh vi wget jq podman buildah skopeo podman-docker glibc-devel zlib-devel gcc libffi-devel libstdc++-devel gcc-c++ glibc-langpack-en ca-certificates python3-pip python3-devel ${JAVA_PACKAGE}; \
   microdnf update -y ; \
   microdnf clean all ; \
@@ -48,9 +48,9 @@ RUN microdnf --disableplugin=subscription-manager install -y procps-ng openssl c
   curl -Ls https://sh.jbang.dev | bash -s - app setup ; \
   ln -s ${JBANG_DIR}/bin/jbang /usr/local/tools/bin/jbang ; \
   chgrp -R 0 /home ; \
-  chmod +x /user-init.sh ; \
+  chmod +x /entrypoint.sh ; \
   chmod -R g=u /home ${WORK_DIR}
 USER 10001
 WORKDIR ${WORK_DIR}
-ENTRYPOINT [ "/user-init.sh" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "tail", "-f", "/dev/null" ]
