@@ -25,7 +25,16 @@ RUN microdnf --disableplugin=subscription-manager install -y procps-ng openssl c
   setcap cap_setgid+ep /usr/bin/newgidmap ; \
   mkdir -p ${HOME}/.config/containers ; \
   mkdir ${HOME}/proc ; \
-  (echo "[containers]";echo "netns=\"host\"";echo "volumes=[";echo "  \"${HOME}/proc:/proc:rw\"";echo "]") > ${HOME}/.config/containers/containers.conf ; \
+  (echo "[containers]"    
+    echo "netns=\"host\""    
+    echo "volumes=["
+    echo "  \"${HOME}/proc:/proc:rw\""    
+    echo "]"    
+    echo "default_sysctls = []"    
+    echo "[engine]"    
+    echo "network_cmd_options=["    
+    echo "  \"enable_ipv6=false\""    
+    echo "]") > ${HOME}/.config/containers/containers.conf ; \
   touch /etc/subgid /etc/subuid ; \
   chmod -R g=u /etc/passwd /etc/group /etc/subuid /etc/subgid ; \
   echo user:20000:65536 > /etc/subuid  ; \
