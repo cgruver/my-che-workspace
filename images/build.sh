@@ -120,9 +120,9 @@ function buildDevImage() {
         DEV_IMAGE_TAG="fuse"
         DEV_CONTAINER_FILE=che-dev-image-fuse.Containerfile
       ;;
-      --init)
-        DEV_IMAGE_TAG="init"
-        DEV_CONTAINER_FILE=che-dev-image-fuse-init.Containerfile
+      --nested)
+        DEV_IMAGE_TAG="nested"
+        DEV_CONTAINER_FILE=che-dev-image-nested.Containerfile
       ;;
     esac
   done
