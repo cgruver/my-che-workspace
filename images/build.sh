@@ -124,6 +124,9 @@ function buildDevImage() {
         DEV_IMAGE_TAG="nested"
         DEV_CONTAINER_FILE=che-dev-image-nested.Containerfile
       ;;
+      --demo)
+        DEV_IMAGE_TAG="demo"
+        DEV_CONTAINER_FILE=che-dev-image-demo.Containerfile
     esac
   done
 
