@@ -26,7 +26,7 @@ RUN microdnf --disableplugin=subscription-manager install -y procps-ng openssl c
   mkdir -p ${HOME}/.config/containers ; \
   mkdir ${HOME}/proc ; \
   (echo '[containers]';echo 'netns="private"';echo 'default_sysctls = []';echo '[engine]';echo 'network_cmd_options=[';echo '  "enable_ipv6=false"';echo ']') > ${HOME}/.config/containers/containers.conf ; \
-  (echo 'unqualified-search-registries = [';echo '  "registry.access.redhat.com",';echo '  "registry.redhat.io",';echo '  "docker.io"'; echo ']'; echo 'short-name-mode = "permissive"') > ${HOME}/.config/containers/registries.conf ; \
+  (echo 'unqualified-search-registries = [';echo '  "docker.io"'; echo ']'; echo 'short-name-mode = "permissive"') > ${HOME}/.config/containers/registries.conf ; \
   touch /etc/subgid /etc/subuid ; \
   chmod -R g=u /etc/passwd /etc/group /etc/subuid /etc/subgid ; \
   echo user:20000:65536 > /etc/subuid  ; \
