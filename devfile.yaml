@@ -44,14 +44,6 @@ components:
     mountSources: true
     memoryLimit: 256M
 commands:
-- exec:
-    commandLine: "kubedock server --port-forward"
-    component: dev-tools
-    group:
-      kind: run
-    label: Kubedock
-    workingDir: '/'
-  id: kubedock
 - apply:
     component: oc-cli
     label: Copy OpenShift CLI
