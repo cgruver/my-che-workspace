@@ -89,5 +89,7 @@ chmod +x ${TOOLS_DIR}/bin/operator-sdk
 cd ${TOOLS_DIR}/bin
 ln -s ../quarkus-cli/bin/quarkus quarkus
 ln -s ../maven/bin/mvn mvn
+ln -s ../go/bin/go go
+ln -s ../go/bin/gofmt gofmt
 ln -s /projects/bin/oc oc
 ln -s /projects/bin/kubectl kubectl

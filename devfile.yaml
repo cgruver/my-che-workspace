@@ -6,7 +6,8 @@ metadata:
 components:
 - name: dev-tools
   container: 
-    image: quay.io/cgruver0/che/che-dev-image:latest
+    # image: quay.io/cgruver0/che/che-dev-image:latest
+    image: image-registry.openshift-image-registry.svc:5000/dev-tools/dev-tools:latest
     memoryLimit: 6Gi
     mountSources: true
     env:
@@ -18,6 +19,8 @@ components:
       value: "/projects/home/.sh_history"
     - name: VSCODE_DEFAULT_WORKSPACE
       value: "/projects/my-che-workspace/my-workspace.code-workspace"
+    - name: GOPATH
+      value: /projects/home/go
     volumeMounts:
     - name: home
       path: /projects/home
