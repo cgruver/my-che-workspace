@@ -30,6 +30,8 @@ RUN microdnf --disableplugin=subscription-manager install -y procps-ng openssl c
   setcap cap_setgid+ep /usr/bin/newgidmap ; \
   mkdir -p ${HOME}/.config/containers ; \
   touch /etc/subgid /etc/subuid ; \
+  chown root:root /etc/subgid ; \
+  chown root:root /etc/subuid ; \
   chmod -R g=u /etc/passwd /etc/group /etc/subuid /etc/subgid ; \
   npm install -g @angular/cli ; \
   npm install -g serverless ; \
