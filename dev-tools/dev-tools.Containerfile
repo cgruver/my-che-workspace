@@ -10,12 +10,12 @@ FROM registry.access.redhat.com/ubi9/ubi-minimal
 
 ARG USER_HOME_DIR="/home/user"
 ARG WORK_DIR="/projects"
-ARG JAVA_PACKAGE=java-17-openjdk-devel
+ARG JAVA_PACKAGE=java-21-openjdk-devel
 ENV HOME=${USER_HOME_DIR}
 ENV BUILDAH_ISOLATION=chroot
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 ENV GRAALVM_HOME=/usr/local/tools/graalvm
-ENV JAVA_HOME=/etc/alternatives/jre_17_openjdk
+ENV JAVA_HOME=/etc/alternatives/jre_21_openjdk
 ENV PATH=${PATH}:/usr/local/tools/bin:/usr/local/tools/node/bin
 ENV JBANG_DIR=/usr/local/tools/jbang
 COPY --from=tools-builder /tools/ /usr/local/tools
