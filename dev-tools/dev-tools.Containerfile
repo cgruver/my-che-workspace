@@ -24,7 +24,6 @@ RUN microdnf --disableplugin=subscription-manager install -y procps-ng openssl c
   microdnf update -y ; \
   microdnf clean all ; \
   mkdir -p ${USER_HOME_DIR} ; \
-  (echo '[storage]';echo 'driver = "vfs"') > "${HOME}"/.config/containers/storage.conf ; \
   mkdir -p ${WORK_DIR} ; \
   mkdir -p /usr/local/bin ; \
   setcap cap_setuid+ep /usr/bin/newuidmap ; \

@@ -5,6 +5,8 @@ then
   mkdir -p "${HOME}"
 fi
 
+(echo '[storage]';echo 'driver = "vfs"') > ${HOME}/.config/containers/storage.conf
+
 if ! whoami &> /dev/null
 then
   if [ -w /etc/passwd ]
