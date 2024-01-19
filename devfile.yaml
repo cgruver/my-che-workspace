@@ -24,10 +24,6 @@ components:
     volumeMounts:
     - name: home
       path: /projects/home
-    endpoints:
-    - name: kubedock
-      targetPort: 2475
-      exposure: none
 - volume:
     size: 10Gi
   name: projects
