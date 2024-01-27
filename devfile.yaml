@@ -15,21 +15,13 @@ components:
       value: "/bin/zsh"
     - name: HOME
       value: "/projects/home"
-    - name: HISTFILE
-      value: "/projects/home/.sh_history"
     - name: VSCODE_DEFAULT_WORKSPACE
       value: "/projects/my-che-workspace/my-workspace.code-workspace"
     - name: GOPATH
       value: /projects/home/go
-    volumeMounts:
-    - name: home
-      path: /projects/home
 - volume:
     size: 10Gi
   name: projects
-- volume:
-    size: 4Gi
-  name: home
 - name: oc-cli
   container:
     args:

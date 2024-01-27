@@ -5,6 +5,7 @@ then
   mkdir -p "${HOME}"
 fi
 
+mkdir -p ${HOME}/.config/containers
 (echo '[storage]';echo 'driver = "vfs"') > ${HOME}/.config/containers/storage.conf
 
 if ! whoami &> /dev/null
@@ -19,5 +20,10 @@ USER=$(whoami)
 START_ID=$(( $(id -u)+1 ))
 echo "${USER}:${START_ID}:2147483646" > /etc/subuid
 echo "${USER}:${START_ID}:2147483646" > /etc/subgid
+
+if [ ! -f ${HOME}/.zshrc ]
+then
+  (echo "HISTFILE=${HOME}/.zsh_history"; echo "HISTSIZE=1000"; echo "SAVEHIST=1000") > ${HOME}/.zshrc
+fi
 
 exec "$@"
